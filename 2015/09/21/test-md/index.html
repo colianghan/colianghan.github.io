@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从另一个角度谈js的面向对象编程（纯语法角度） | ColiangHan&#39;s Bolg</title>
+  <meta name="author" content="colianghan">
+
+  
+  <meta name="description" content="coding一生，与码为伴">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="ColiangHan&#39;s Bolg" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?135190331e6516b43062831feccf8bf8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">从另一个角度谈js的面向对象编程（纯语法角度）</h1>
+  
+
+    <time datetime="2015-09-21T12:21:32.000Z">
+  <span class="day">21</span><span class="month">Sep</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="前言">前言</h2><p>想写这篇这文章，已经很久很久了，起源是因为，从接触js开始，查看的网上，对于面向对象的解释都大同小异，都是从js语言特性的角度来分析的，什么作用域链，原型链巴拉巴拉的。。。</p>
+<p>其实，这些文章很不错，但是，私下里总觉得少了什么样子似得，直到跟一个朋友唠嗑的时候，才意识到哪里出了问题。</p>
+<p>场景大概是这样子的，一个写后端c系语言的朋友，来找我抱怨js的东东，说看了一遍书中对js面向编程的详解，觉得好郁闷，问我啥叫原型链啊，prototype到底干嘛用的。</p>
+<p>我跟他解释了半天，什么作用域的构造了巴拉拉的一大顿，不得其解，然后跟他说，这个就像 class中的<code>::</code> 运算符一样。所有定义在prototype上的，都会被对象继承，作为类外定义，朋友豁然开朗。 </p>
+<p>所以，私以为，把js中面向对象的一些东西，用真正后台语言的词汇来近似的解释一遍，感觉对从后端转前端的猿们来说，还是可以提高快速理解的吧，同时也能够验证自己是否真正从语法角度掌握了js的面向对象。</p>
+<a id="more"></a>
+<h2 id="后端的类">后端的类</h2><p>类有字段（常说的变量）和方法（常说的函数）两个部分，<br>每个部分中又包含public,protected,private三种属性，其中各属性的区别有很多，这里只是来做简要的说明：</p>
+<ul>
+<li><p>public: 使用该属性声明的类成员，对象可以直接访问到，子类继承后也是public属性的</p>
+</li>
+<li><p>protected:  使用该属性声明的类成员，对象不能直接访问到，子类继承后是private属性的</p>
+</li>
+<li><p>private： 使用该属性声明的类成员，对象不能直接访问到，子类没有办法访问到。</p>
+</li>
+</ul>
+<p>此外还有个定义在类本身的static关键字。所以可以用这样的公式来声明类成员：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[<span class="keyword">public</span>|<span class="keyword">protected</span>|<span class="keyword">private</span>] [<span class="keyword">static</span>] [type] [vars];</span><br><span class="line"></span><br><span class="line"><span class="comment">//如: public static int id;</span></span><br></pre></td></tr></table></figure>
+<p>当然，上述公式并不准确，因为类除了上述几个关键字外，还有inline，::（作用域运算符）等等，但作为一个本身就不太准确严谨的目的来说，上述公式可以更好的帮助我理解和梳理。</p>
+<h2 id="前端的类">前端的类</h2><p>class在js中，是作为一个保留字存在的，而在最新的es6(es2005)中，class则跟后台的class一样，都是能够定义 类,代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">trueconstructor(name)&#123;</span><br><span class="line">truetrue<span class="keyword">this</span>.name = name;</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="built_in">console</span>()&#123;</span><br><span class="line">truetrue<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是es6的这些东西只是个语法糖而已，我们仍然可以通过es5中prototype和闭包来进行类的定义。</p>
+<h2 id="两者的映射关系">两者的映射关系</h2><p>如下代码是个简单的类的定义，其中的注释部分说明了前端的类和后端的类的一些微妙的联系：</p>
+<pre><code class="javascript"><span class="comment">// class Test 的声明 </span>
+<span class="comment">// class Test{</span>
+<span class="comment">//   public Test(){</span>
+<span class="comment">//     //</span>
+<span class="comment">//   }</span>
+<span class="comment">// }</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">name</span>)</span>{
+    <span class="comment">// public string name;</span>
+    <span class="keyword">this</span>.name = name; 
+
+    <span class="comment">// public void publicMethod</span>
+    <span class="keyword">this</span>.publicMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);
+    }
+
+    <span class="comment">//private int pri</span>
+    <span class="keyword">var</span> pri = <span class="number">0</span>;
+
+    <span class="comment">// public int Pri </span>
+    <span class="comment">// 对象可以通过该方法访问到 定义的pri 变量</span>
+    <span class="keyword">this</span>.getPri = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> pri;
+    }
+
+    <span class="comment">//private void function</span>
+    <span class="keyword">var</span> privateMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);
+    }
+}
+
+<span class="comment">// public static string staticVar</span>
+<span class="comment">// 只能是类名调用</span>
+Test.staticVar = <span class="string">'this is this static vars'</span>;
+
+<span class="comment">//public static void staticMethod</span>
+<span class="comment">//只能是类名调用</span>
+Test.staticMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="built_in">console</span>.log(Test.staticVar);
+    <span class="comment">// this.name 会访问到window.name的值</span>
+}
+
+<span class="comment">//类外声明变量和函数</span>
+<span class="comment">//</span>
+<span class="comment">// Public string Test::commonVar  </span>
+Test.prototype.commonVar = <span class="string">'this is common Var'</span>; 
+
+<span class="comment">//Public void Test::commonFunction  </span>
+Test.prototype.commonFunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="built_in">console</span>.log(<span class="string">'this is common commonFunction'</span>);
+}
+
+<span class="comment">//public Static function/vars 对象能够调用的</span>
+Test.prototype.staticObj = {
+    name:<span class="string">'hello world'</span>,
+    func:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">//hello world</span>
+    }
+}
+
+<span class="comment">//在函数内部声明static关键字</span>
+<span class="comment">//</span>
+<span class="comment">//function a (){static int var; }</span>
+<span class="keyword">var</span> a = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="keyword">var</span> _staticVar = <span class="number">0</span>;
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        _staticVar++;
+        <span class="built_in">console</span>.log(_staticVar);
+    }
+}());
+</code></pre>
+<h2 id="总结">总结</h2><p>本篇文章，从语法的角度，对前端的类与后端的类做了简单的说明，并阐述了两者之间的映射关系。</p>
+<p>作为自己平时学习的感悟和总结，对本文中的出现的错误，欢迎大家予以指正。</p>
+<p>本片文章，为本人原创，转载时，请声明本文作者和本篇文章的<a href="% permalink %">链接</a>。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/javascript/">javascript</a><a href="/tags/oop/">oop</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+<section id="comment">
+  	<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-test-md" data-title="从另一个角度谈js的面向对象编程（纯语法角度）" data-url="http://www.colinhaks.me/2015/09/21/test-md/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'colinghan'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+    <a class="github" href="https://github.com/colianghan" title="GitHub">GitHub</a>
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 colianghan
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

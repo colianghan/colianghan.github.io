@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ColiangHan&#39;s Bolg</title>
+  <meta name="author" content="colianghan">
+
+  
+  <meta name="description" content="coding一生，与码为伴">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="ColiangHan&#39;s Bolg" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?135190331e6516b43062831feccf8bf8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2015/09/21/test-md/">从另一个角度谈js的面向对象编程（纯语法角度）</a></h1>
+  
+
+    <time datetime="2015-09-21T12:21:32.000Z">
+  <span class="day">21</span><span class="month">Sep</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="前言">前言</h2><p>想写这篇这文章，已经很久很久了，起源是因为，从接触js开始，查看的网上，对于面向对象的解释都大同小异，都是从js语言特性的角度来分析的，什么作用域链，原型链巴拉巴拉的。。。</p>
+<p>其实，这些文章很不错，但是，私下里总觉得少了什么样子似得，直到跟一个朋友唠嗑的时候，才意识到哪里出了问题。</p>
+<p>场景大概是这样子的，一个写后端c系语言的朋友，来找我抱怨js的东东，说看了一遍书中对js面向编程的详解，觉得好郁闷，问我啥叫原型链啊，prototype到底干嘛用的。</p>
+<p>我跟他解释了半天，什么作用域的构造了巴拉拉的一大顿，不得其解，然后跟他说，这个就像 class中的<code>::</code> 运算符一样。所有定义在prototype上的，都会被对象继承，作为类外定义，朋友豁然开朗。 </p>
+<p>所以，私以为，把js中面向对象的一些东西，用真正后台语言的词汇来近似的解释一遍，感觉对从后端转前端的猿们来说，还是可以提高快速理解的吧，同时也能够验证自己是否真正从语法角度掌握了js的面向对象。</p>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/javascript/">javascript</a><a href="/tags/oop/">oop</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2015/09/21/hello-world/">Hello World</a></h1>
+  
+
+    <time datetime="2015-09-21T11:42:04.627Z">
+  <span class="day">21</span><span class="month">Sep</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+<nav id="pagenavi">
+  
+  
+  <div class="clearfix"></div>
+</nav></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+    <a class="github" href="https://github.com/colianghan" title="GitHub">GitHub</a>
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 colianghan
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>
