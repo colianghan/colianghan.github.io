@@ -56,27 +56,43 @@ var _hmt = _hmt || [];
   <header>
     
   
-    <h1 class="title"><a href="/2015/09/21/test-md/">从另一个角度谈js的面向对象编程（纯语法角度）</a></h1>
+    <h1 class="title"><a href="/2015/09/24/lowest-situation-ua/">从最短识别非现代浏览器语句引发的知识串烧</a></h1>
   
 
-    <time datetime="2015-09-21T12:21:32.000Z">
-  <span class="day">21</span><span class="month">Sep</span>
+    <time datetime="2015-09-24T11:58:13.000Z">
+  <span class="day">24</span><span class="month">Sep</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <h2 id="前言">前言</h2><p>想写这篇这文章，已经很久很久了，起源是因为，从接触js开始，查看的网上，对于面向对象的解释都大同小异，都是从js语言特性的角度来分析的，什么作用域链，原型链巴拉巴拉的。。。</p>
-<p>其实，这些文章很不错，但是，私下里总觉得少了什么样子似得，直到跟一个朋友唠嗑的时候，才意识到哪里出了问题。</p>
-<p>场景大概是这样子的，一个写后端c系语言的朋友，来找我抱怨js的东东，说看了一遍书中对js面向编程的详解，觉得好郁闷，问我啥叫原型链啊，prototype到底干嘛用的。</p>
-<p>我跟他解释了半天，什么作用域的构造了巴拉拉的一大顿，不得其解，然后跟他说，这个就像 class中的<code>::</code> 运算符一样。所有定义在prototype上的，都会被对象继承，作为类外定义，朋友豁然开朗。 </p>
-<p>所以，私以为，把js中面向对象的一些东西，用真正后台语言的词汇来近似的解释一遍，感觉对从后端转前端的猿们来说，还是可以提高快速理解的吧，同时也能够验证自己是否真正从语法角度掌握了js的面向对象。</p>
+      <h2 id="序">序</h2><p>今天偶尔在网上看到了这么一个语句<code>var isIE =!-[1,]</code>,感觉很有意思，所以写了这一篇文章，记录下当时我的感想。</p>
+<h2 id="分析">分析</h2><ol>
+<li><p>首先这一个语句是有问题的，他并不能识别ie9+以上浏览器（我们有时候也会称之为现代浏览器），至于为什么不能识别，我们下文会有具体的分析，至于为什么会起这么个引人误会的<code>isIE</code>这个变量，是因为这个语句产生时的时间是还没有出现ie9呢（–！暗汗一下）。</p>
+</li>
+<li><p>这个浏览器识别标志是根据浏览器的特性来识别的，我们知道浏览器识别可以有两种办法（我所知道的，亲们有其他的方法，欢迎@我）。</p>
+<ul>
+<li><p>第一种办法是用window.navigator这个属性来进行正则匹配进行识别，可以通过它来识别浏览器的种别，同时可以识别浏览器的版本号</p>
+</li>
+<li><p>第二种办法就是根据各浏览器的解析特性不同，而进行判别，这种方法可以很方便的分别浏览器的版本，但是会有几个问题出现。</p>
+<ol>
+<li><p>可能会随着浏览器的升级而失效，增加后期的维护和升级成本。比如文中的这个语句，在ie8统治的时代会很cool，但是当ie9出现后，会随之出现各种让你伤心的bug的。</p>
+</li>
+<li><p>就是当需要不仅识别浏览器，还需要识别浏览器的版本时，你可能需要用到很多的条件，就没有第一种方法的便利了。</p>
+</li>
+<li><p>增加代码的阅读难度系数，当你写的代码给另外一个基础不是很扎实的时候，我想维护代码的人一定云里雾里的（纯发牢骚。。。）</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
     
     
     <footer class="meta">
       
       
   <div class="tags">
-<a href="/tags/javascript/">javascript</a><a href="/tags/oop/">oop</a></div>
+<a href="/tags/javascript/">javascript</a></div>
 
       
     </footer>
@@ -102,30 +118,28 @@ var _hmt = _hmt || [];
   <header>
     
   
-    <h1 class="title"><a href="/2015/09/21/hello-world/">Hello World</a></h1>
+    <h1 class="title"><a href="/2015/09/21/test-md/">从另一个角度谈js的面向对象编程（纯语法角度）</a></h1>
   
 
-    <time datetime="2015-09-21T11:42:04.627Z">
+    <time datetime="2015-09-21T12:21:32.000Z">
   <span class="day">21</span><span class="month">Sep</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+      <h2 id="前言">前言</h2><p>想写这篇这文章，已经很久很久了，起源是因为，从接触js开始，查看的网上，对于面向对象的解释都大同小异，都是从js语言特性的角度来分析的，什么作用域链，原型链巴拉巴拉的。。。</p>
+<p>其实，这些文章很不错，但是，私下里总觉得少了什么样子似得，直到跟一个朋友唠嗑的时候，才意识到哪里出了问题。</p>
+<p>场景大概是这样子的，一个写后端c系语言的朋友，来找我抱怨js的东东，说看了一遍书中对js面向编程的详解，觉得好郁闷，问我啥叫原型链啊，prototype到底干嘛用的。</p>
+<p>我跟他解释了半天，什么作用域的构造了巴拉拉的一大顿，不得其解，然后跟他说，这个就像 class中的<code>::</code> 运算符一样。所有定义在prototype上的，都会被对象继承，作为类外定义，朋友豁然开朗。 </p>
+<p>所以，私以为，把js中面向对象的一些东西，用真正后台语言的词汇来近似的解释一遍，感觉对从后端转前端的猿们来说，还是可以提高快速理解的吧，同时也能够验证自己是否真正从语法角度掌握了js的面向对象。</p>
     
     
     <footer class="meta">
       
       
+  <div class="tags">
+<a href="/tags/javascript/">javascript</a><a href="/tags/oop/">oop</a></div>
+
       
     </footer>
     
