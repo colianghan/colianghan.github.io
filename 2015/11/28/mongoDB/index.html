@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mongoDB | ColiangHan&#39;s Bolg</title>
+  <meta name="author" content="colianghan">
+
+  
+  <meta name="description" content="coding一生，与码为伴">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="ColiangHan&#39;s Bolg" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?135190331e6516b43062831feccf8bf8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">mongoDB</h1>
+  
+
+    <time datetime="2015-11-28T09:32:01.000Z">
+  <span class="day">28</span><span class="month">Nov</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="唠叨">唠叨</h2><p>本来好好的星期六，可以睡懒觉的日子，却被通知今天要来公司加班，还他喵的无偿加班。。更他喵的让人无语的还是没有任务，只是因为别的部门要加班，涉及到我这写的一些东西，就要过来。真的已经不知道说啥好了。。心中不止一只草泥马神兽在飞过了。。。( ˇˍˇ )</p>
+<p>虽然心情很糟糕的说，但是困在单位，一整天，无所事事更感觉浪费生命。发现单位这台破电脑，mongo竟然没有装，反正闲着也是闲着，就这么装下吧，遇到的问题，也在这里记录下。。</p>
+<h2 id="踩了几个坑">踩了几个坑</h2><p>就不吐槽公司的网有多坑爹了，反正n多分钟以后，mongo的安装包也就那么下载完了。安装的过程挺简单的，下一步下一步的就那么安装完了，但是开启mongo服务的时候遇到了点问题，大概以下几点：</p>
+<p>[说明，本人在单位的电脑是 <strong>window7 32</strong>位操作系统]<br><a id="more"></a></p>
+<ul>
+<li>安装成功后，将存放有mongod.exe的文件所在文件夹加入系统环境Path变量中，就可以在任意文件夹中打开cmd 输入mongod和mongo这些命令了</li>
+<li><p>当遇到这个问题时，是说明当前的命令行窗口处于非管理员状态，切换成管理员状态即可</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I CONTROL  Hotfix KB2731284 or later update is not installed, will zero-out data files</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在windows 32位操作系统下，默认是不开启journal模式的,命令还开启时，添加–journal即可</p>
+</li>
+<li><p>mongod.exe中开启数据库服务，必须要添加logpath才可以，否则，会提示说 –insatll 作为log的默认路径。<br>具体的命令如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath=&#34;&#25968;&#25454;&#24211;&#25991;&#20214;&#22841;&#34; [--logappend]  --logpath=&#34;log&#26085;&#24535;&#25991;&#20214;&#34; --install --serviceName=&#34;[&#20320;&#36215;&#30340;&#21517;&#23383;&#65292;&#27604;&#22914;mongoDB]&#34;&#10;net start [&#20320;&#36215;&#30340;&#21517;&#23383;]&#10;net stop [&#20320;&#36215;&#30340;&#21517;&#23383;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>–logpath=”具体的文件名”,当不使用–logappend参数时，每次重启都会创建改文件，同时，把已有的文件添加事件后缀，存放在当前目录下。<br><img src="1.png" alt="img"></p>
+</li>
+<li>使用mongo 命令 来在命令行查看数据库 </li>
+<li>相应的客户端gui有mongoVUE,RoboMongo<br><img src="2.png" alt="img"><br>以上就是大概这次安装时候总结的一些东东吧。<br>一天的大好时光就这么浪费在这个没有任务，又被逼加班的事情上了，心情很郁闷呢。。。还要不得不装作很忙的样子在打酱油中去O__O “…”</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/mongoDB/">mongoDB</a><a href="/tags/sql/">sql</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+<section id="comment">
+  	<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-mongoDB" data-title="mongoDB" data-url="http://www.colinhaks.me/2015/11/28/mongoDB/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'colinghan'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+    <a class="github" href="https://github.com/colianghan" title="GitHub">GitHub</a>
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 colianghan
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>
